@@ -1,0 +1,272 @@
+@mixin avatar-colors-text {
+  &.red         { color: $material_red         ; }
+  &.pink        { color: $material_pink        ; }
+  &.purple      { color: $material_purple      ; }
+  &.deep_purple { color: $material_deep_purple ; }
+  &.indigo      { color: $material_indigo      ; }
+  &.blue        { color: $material_blue        ; }
+  &.light_blue  { color: $material_light_blue  ; }
+  &.cyan        { color: $material_cyan        ; }
+  &.teal        { color: $material_teal        ; }
+  &.green       { color: $material_green       ; }
+  &.light_green { color: $material_light_green ; }
+  &.orange      { color: $material_orange      ; }
+  &.deep_orange { color: $material_deep_orange ; }
+  &.amber       { color: $material_amber       ; }
+  &.blue_grey   { color: $material_blue_grey   ; }
+  &.grey        { color: #999999               ; }
+  &.default     { color: $blue                 ; }
+}
+
+@mixin dark-avatar-colors-text {
+  &.red         { color: $dark_material_red         ; }
+  &.pink        { color: $dark_material_pink        ; }
+  &.purple      { color: $dark_material_purple      ; }
+  &.deep_purple { color: $dark_material_deep_purple ; }
+  &.indigo      { color: $dark_material_indigo      ; }
+  &.blue        { color: $dark_material_blue        ; }
+  &.light_blue  { color: $dark_material_light_blue  ; }
+  &.cyan        { color: $dark_material_cyan        ; }
+  &.teal        { color: $dark_material_teal        ; }
+  &.green       { color: $dark_material_green       ; }
+  &.light_green { color: $dark_material_light_green ; }
+  &.orange      { color: $dark_material_orange      ; }
+  &.deep_orange { color: $dark_material_deep_orange ; }
+  &.amber       { color: $dark_material_amber       ; }
+  &.blue_grey   { color: $dark_material_blue_grey   ; }
+  &.grey        { color: #666666               ; }
+  &.default     { color: $blue                 ; }
+}
+
+
+
+
+// _index.scss
+
+// gutter width hacks seem to be broken by now
+
+// .gutter {
+//   width: inherit;
+//   max-width: 300px;
+//   width: 25%;
+//   .last-timestamp {
+//     overflow: visible;
+//     max-width: 30%
+//   }
+//   .conversations {
+//     overflow-y: auto;
+//   }
+// }
+
+// .conversation-stack {
+//   padding-left: 0px;
+// }
+
+
+
+// _global.scss
+
+// ::-webkit-scrollbar {
+//     height: 5px;
+// }
+
+// ::-webkit-scrollbar-corner {
+//   color: $grey_l;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background: rgba(white,0.15);
+
+//   &:hover {
+//     background: rgba(white,0.25);
+//   }
+// }
+
+
+.contact {
+  position: relative;
+  padding: 2px;
+  padding-left: 12px;
+}
+
+// conversation.scss
+
+
+.conversation-title {
+  padding: 0 36px;
+}
+
+.conversation {
+  .main.panel {
+    .discussion-container {
+      .message-list {
+        padding: 2em 4px 0;
+      }
+    }
+  }
+}
+
+.message-detail {
+    .message-container {
+    .sender {
+      display: initial;
+    }
+  }
+}
+
+
+.message-list {
+  overflow-x: hidden;
+  li.entry {
+    display: table-row;
+    margin: 0 auto 0px;
+  }
+
+  .body {
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    a {
+      word-break: break-all
+    }
+  }
+
+  .content, .sender, .timestamp {
+    -webkit-user-select: text;
+  }
+
+
+  .sender {
+    display: inline;
+  }
+
+  .meta, .sender {
+    font-size: inherit;
+    margin-top: 0px;
+    float: none;
+    text-align: inherit;
+    line-height: normal;
+    font-weight: normal;
+  }
+
+  .meta, .sender-container {
+    max-width: 15vw;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .self-sender {
+    opacity: 0.5;
+  }
+
+  .meta, .sender-container, .content-container {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  .content {
+    margin-left: 5px;
+  }
+
+  .timestamp, .status {
+    cursor: pointer;
+  }
+
+  .hasRetry, .timestamp, .status, .outgoing .meta {
+    float: none;
+  }
+
+
+  .meta .timestamp , .status {
+    opacity: 0.25;
+
+    &:hover {
+      opacity: 1.0;
+    }
+  }
+
+
+  .self-sender:after {
+    content: "";
+    width: 1em;
+    height: 1em;
+    margin: 0px 4px;
+    opacity: 0.5;
+    display: inline-block;
+  }
+
+  .pending .self-sender:after {
+    content: '...';
+  }
+}
+
+// theme specific
+
+.android-dark .message-list {
+  .sent .self-sender:after {
+    @include color-svg('/images/check.svg', white);
+  }
+  .delivered .self-sender:after {
+    @include color-svg('/images/double-check.svg', white);
+  }
+  .other-sender {
+    @include avatar-colors-text;
+  }
+}
+
+.android , .ios {
+  .message-list {
+    .other-sender {
+      @include dark-avatar-colors-text;
+    }
+    .sent .self-sender:after {
+      @include color-svg('/images/check.svg', black);
+    }
+    .delivered .self-sender:after {
+      @include color-svg('/images/double-check.svg', black);
+    }
+  }
+}
+
+// ios unstyles
+
+.ios .incoming .content {
+  background-color: white;
+  color: $grey_d;
+  float: none;
+}
+
+.ios .outgoing .content {
+  background-color: white;
+  .body {
+    color: $grey_d;
+  }
+  float: none;
+  a {
+    color: #2090ea;
+  }
+}
+
+// unnecessary since global gutter hacks were deactivated
+// .ios .gutter {
+//   // ios gutter breaks with width changes
+//   width: 300px;
+// }
+
+
+// size changes
+
+.message-list {
+  .meta, .sender-container, .content {
+    font-size: initial;
+  }
+
+  img.emoji {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: top;
+    position: relative;
+    top: -0.2em;
+    margin-bottom: -0.5em;
+  }
+}
