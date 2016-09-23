@@ -267,7 +267,7 @@
   <script type='text/x-tmpl-mustache' id='verified-change'>
       <span class='content' dir='auto'><span class='{{ icon }} icon'></span> {{ content }}</span>
   </script>
-  <script type='text/x-tmpl-mustache' id='message'>
+  <script type='text/x-tmpl-mustache' id='message-master-branch'>
       {{> avatar }}
       <div class='bubble {{ avatar.color }}'>
           <div class='sender' dir='auto'>
@@ -287,6 +287,24 @@
           </div>
       </div>
   </script>
+
+  <script type='text/x-tmpl-mustache' id='message'>
+          <div class='meta'>
+            <span class='timestamp' data-timestamp={{ timestamp }}></span>
+            <span class='timer'></span>
+          </div>
+          <div class='sender-container'>
+            {{ #sender }} <span class='sender other-sender {{ avatar.color }}' dir='auto'>{{ sender }}</span> {{ /sender }}
+            {{ ^sender }}
+              <span class='sender self-sender'>You</span>
+            {{ /sender }}
+          </div>
+          <div class='content' dir='auto'>
+            {{ #message }}<span class='body'>{{ message }}</span>{{ /message }}
+            <div class='attachments'></div>
+          </div>
+  </script>
+
   <script type='text/x-tmpl-mustache' id='hourglass'>
       <span class='hourglass'><span class='sand'></span></span>
   </script>
