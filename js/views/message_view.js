@@ -344,7 +344,7 @@
                 Mustache.render(_.result(this, 'template', ''), {
                     message: this.model.get('body'),
                     timestamp: this.model.get('sent_at'),
-                    sender: (contact && contact.getTitle()) || '',
+                    sender: (contact && contact.getTitle().split(" ", 2)[0]) || '',
                     avatar: (contact && contact.getAvatar()),
                     profileName: (contact && contact.getProfileName()),
                 }, this.render_partials())
