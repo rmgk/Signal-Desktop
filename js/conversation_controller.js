@@ -24,13 +24,10 @@
         comparator: function(m1, m2) {
             var timestamp1 = m1.get('timestamp');
             var timestamp2 = m2.get('timestamp');
-            if (timestamp1 && timestamp2) {
-                return timestamp2 - timestamp1;
-            }
-            if (timestamp1) {
+            if (timestamp1 && !timestamp2) {
                 return -1;
             }
-            if (timestamp2) {
+            if (timestamp2 && !timestamp1) {
                 return 1;
             }
             var title1 = m1.getTitle().toLowerCase();
