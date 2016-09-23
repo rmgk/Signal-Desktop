@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/WhisperSystems/Signal-Desktop.svg?branch=master)](https://travis-ci.org/WhisperSystems/Signal-Desktop)
+# About this fork
+
+This fork changes the UI to suit a different set of preferences.
+
 Signal Desktop
 ==========================
 
