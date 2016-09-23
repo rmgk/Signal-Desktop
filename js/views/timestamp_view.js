@@ -58,21 +58,9 @@
             } else if (timediff.days() > 0) {
                 this.delay = moment(timestamp).add(timediff.days() + 1,'d').diff(now);
                 return timestamp.format(this._format.d);
-            } else if (timediff.hours() > 1) {
-                this.delay = moment(timestamp).add(timediff.hours() + 1,'h').diff(now);
-                return this.relativeTime(timediff.hours(), 'h');
-            } else if (timediff.hours() === 1) {
-                this.delay = moment(timestamp).add(timediff.hours() + 1,'h').diff(now);
-                return this.relativeTime(timediff.hours(), 'h');
-            } else if (timediff.minutes() > 1) {
-                this.delay = moment(timestamp).add(timediff.minutes() + 1,'m').diff(now);
-                return this.relativeTime(timediff.minutes(), 'm');
-            } else if (timediff.minutes() === 1) {
-                this.delay = moment(timestamp).add(timediff.minutes() + 1,'m').diff(now);
-                return this.relativeTime(timediff.minutes(), 'm');
             } else {
-                this.delay = moment(timestamp).add(1,'m').diff(now);
-                return this.relativeTime(timediff.seconds(), 's');
+                this.delay = moment(timestamp).add(timediff.hours() + 1,'h').diff(now);
+                return timestamp.format(this._format.T);
             }
         },
         relativeTime : function (number, string) {
@@ -81,7 +69,8 @@
         _format: {
             y: "ll",
             M: i18n('timestampFormat_M') || "MMM D",
-            d: "ddd"
+            d: "ddd",
+            T: "HH:mm:ss"
         }
     });
     Whisper.ExtendedTimestampView = Whisper.TimestampView.extend({
@@ -91,7 +80,8 @@
         _format: {
             y: "lll",
             M: (i18n('timestampFormat_M') || "MMM D") + ' LT',
-            d: "ddd LT"
+            d: "ddd LT",
+            T: "HH:mm:ss"
         }
     });
 })();
